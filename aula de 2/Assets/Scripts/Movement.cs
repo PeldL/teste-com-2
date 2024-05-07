@@ -41,10 +41,7 @@ public class Movement : MonoBehaviour
             direction = (int)horizontal;
 
         }
-        if (Input.GetButtonDown("Run"))
-        {
-            speed = speed * 2;
-        }
+        
 
         horizontal = Input.GetAxisRaw("Horizontal");
         body.velocity = new Vector2(horizontal * speed, body.velocity.y);
