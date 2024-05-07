@@ -8,11 +8,15 @@ public class Movement : MonoBehaviour
     private float horizontal;
     public Rigidbody2D body;
     public float jumpStrenth;
+
     public GameObject bullet;
+
+
     public Transform foot;
     public bool groundCheck;
-    public int life = 1;
-    int direction = 1;
+
+    int direction;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -37,11 +41,25 @@ public class Movement : MonoBehaviour
             direction = (int)horizontal;
 
         }
+        if (Input.GetButtonDown("Run"))
+        {
+            speed = speed * 2;
+        }
 
         horizontal = Input.GetAxisRaw("Horizontal");
         body.velocity = new Vector2(horizontal * speed, body.velocity.y);
         groundCheck = Physics2D.OverlapCircle(foot.position, 0.05f);
 
     }
-    
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            Destroy(gameObject);
+
+        }
+
+
+
+    }
 }
